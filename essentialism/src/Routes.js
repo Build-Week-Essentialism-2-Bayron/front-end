@@ -1,8 +1,8 @@
 import React from 'react'
-import './App.css'
+import './styles/App.css'
 
-function App() {
-	return <div className='App' />
+function Routes() {
+	return <div className='App'>TODO: Add Application</div>
 }
 
 export default Routes
