@@ -38,15 +38,15 @@ export default function ValueList() {
         <FormGroup>
           <FormControlLabel
             control={<Checkbox checked={gilad} onChange={handleChange} name="gilad" />}
-            label="Gilad Gray"
+            label="Creativity"
           />
           <FormControlLabel
             control={<Checkbox checked={jason} onChange={handleChange} name="jason" />}
-            label="Jason Killian"
+            label="Health"
           />
           <FormControlLabel
             control={<Checkbox checked={antoine} onChange={handleChange} name="antoine" />}
-            label="Antoine Llorca"
+            label="Career"
           />
         </FormGroup>
         <FormHelperText>Be careful</FormHelperText>
@@ -56,15 +56,15 @@ export default function ValueList() {
         <FormGroup>
           <FormControlLabel
             control={<Checkbox checked={gilad} onChange={handleChange} name="gilad" />}
-            label="Gilad Gray"
+            label="Creativity"
           />
           <FormControlLabel
             control={<Checkbox checked={jason} onChange={handleChange} name="jason" />}
-            label="Jason Killian"
+            label="Health"
           />
           <FormControlLabel
             control={<Checkbox checked={antoine} onChange={handleChange} name="antoine" />}
-            label="Antoine Llorca"
+            label="Career"
           />
         </FormGroup>
         <FormHelperText>You can display an error</FormHelperText>

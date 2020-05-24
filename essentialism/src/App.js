@@ -4,12 +4,13 @@ import './App.css';
 import UserForm from "./UserForm"
 import ValueList from "./ValueList"
 import {BrowserRouter as Router, Route} from "react-router-dom";
+import UserFormOne from './UserFormOne';
 
 function App() {
   return (
     <div className="App">
       <UserForm/>
-      <ValueList/>
+      {/* <ValueList/> */}
     </div>
   );
 }
