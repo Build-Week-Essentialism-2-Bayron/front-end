@@ -1,46 +1,19 @@
-import React, { useEffect } from "react";
-import Login from "../UserAuth/Login";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { getJobs } from "../../Redux/actions/jobs";
-import { getSeekers } from "../../Redux/actions/seekers";
-import { getCompanies } from "../../Redux/actions/companies";
+import React, { useEffect, useState } from 'react'
+// import Login from '../UserAuth/Login'
+import { Link } from 'react-router-dom'
 
-const LandingPage = ({ jobs, seekers, getJobs, getSeekers, getCompanies }) => {
-  useEffect(() => {
-    getJobs();
-  }, []);
+const LandingPage = () => {
+	const [ updateForm, setUpdateForm ] = useState(false)
 
-  useEffect(() => {
-    getSeekers();
-  }, [jobs]);
+	return (
+		<div className='landing-page'>
+			<h1>ESSENTIALISM</h1>
+			<div className={`form ${updateForm ? 'hidden' : ''}`}>
+				<Link to='/mainUI'>Profile</Link>
+				<Link to='/'>Log Out</Link>
+			</div>
+		</div>
+	)
+}
 
-  useEffect(() => {
-    getCompanies();
-  }, [seekers]);
-
-  return (
-    <div className="landing-page">
-      <h1>Droom</h1>
-      <h2>Find Your Droom Job!</h2>
-      <Login />
-      <h4>Don't have an account? </h4>
-      {/* <div className="links"> */}
-      <Link to="/register">Sign Up</Link>
-      {/* </div> */}
-    </div>
-  );
-};
-
-const mapStateToProps = state => {
-  return {
-    jobs: state.jobs,
-    seekers: state.seekers
-  };
-};
-
-export default connect(mapStateToProps, {
-  getJobs,
-  getSeekers,
-  getCompanies
-})(LandingPage);
+export default LandingPage
