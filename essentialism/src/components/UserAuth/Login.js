@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import Spinner from '../Spinner'
+// import Spinner from '../Spinner'
 
 import { useHistory } from 'react-router-dom'
 
@@ -11,7 +11,6 @@ const Login = () => {
 		id: '',
 		name: '',
 		password: '',
-		type: '',
 	})
 
 	const handleChange = e => {
@@ -26,7 +25,7 @@ const Login = () => {
 		e.preventDefault()
 		console.log('This is newUser in the Login.js handleSubmit: ', newUser)
 
-		history.replace(`/${newUser.type}UI`)
+		history.replace(`/mainUI/${newUser.id}`)
 	}
 	return (
 		<div className='login-form-wrapper'>
@@ -42,18 +41,11 @@ const Login = () => {
 					placeholder='password'
 					onChange={handleChange}
 				/>
-
-				<label htmlFor='type'>Select User Type</label>
-				<select name='type' value={newUser.type} className='select-dropdown' onChange={handleChange}>
-					<option id='placeholder'>Login As...</option>
-					<option>seeker</option>
-					<option>company</option>
-				</select>
 				<button onClick={handleSubmit} className='submit-button'>
 					Log In
 				</button>
 			</form>
-			{/* <Spinner /> */}
+			s{' '}
 		</div>
 	)
 }

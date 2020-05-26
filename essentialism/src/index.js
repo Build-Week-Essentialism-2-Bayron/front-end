@@ -8,6 +8,8 @@ import './styles/index.css'
 
 const UserContext = createContext()
 
+UserContext.displayName = 'userContext'
+
 const initState = {
 	user: {
 		projects: [],
@@ -18,6 +20,7 @@ const initState = {
 ReactDOM.render(
 	<UserContext.Provider value={initState}>
 		<Router>
+			{console.log(initState)}
 			<Routes />
 		</Router>
 	</UserContext.Provider>,
