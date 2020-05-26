@@ -39,13 +39,13 @@ const Register = props => {
 
 	return (
 		<div className='auth-form-wrapper'>
-			<h1>Essentialism</h1>
-			<h2>Simplify Your Life</h2>
 			<form onSubmit={handleSubmit} className='auth-form'>
-				<label htmlFor='username'>Enter Username</label>
+				{/* Create semantic labels and field names for the values needed to register a new user */}
+
+				<label htmlFor='username'>Enter Username: </label>
 				<input name='name' type='text' value={newUser.name} placeholder='username' onChange={handleChange} />
 
-				<label htmlFor='password'>Enter Password</label>
+				<label htmlFor='password'>Enter Password: </label>
 				<input
 					name='password'
 					type='text'
@@ -53,13 +53,6 @@ const Register = props => {
 					placeholder='password'
 					onChange={handleChange}
 				/>
-
-				<label htmlFor='type'>Select User Type</label>
-				<select name='type' value={newUser.type} className='select-dropdown' onChange={handleChange}>
-					<option id='placeholder'>Register As...</option>
-					<option>seeker</option>
-					<option>company</option>
-				</select>
 
 				<button onClick={handleSubmit} className='submit-button'>
 					Sign Up

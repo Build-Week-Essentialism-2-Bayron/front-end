@@ -7,7 +7,8 @@ import UserMain from './components/MainUI/UserMain'
 import UserProfile from './components/Profile/UserProfile'
 import Register from './components/UserAuth/Register'
 import NoMatch from './components/NoMatch'
-import './styles/App.css'
+
+import './styles/index.css'
 
 // The Routes component will handle all of the routing/ navigation for the app. It's sole purpose is to set the URL paths and render components based upon given URLs
 
