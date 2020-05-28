@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Register from '../UserAuth/Register'
 import { Link } from 'react-router-dom'
 
-const LandingPage = () => {
+const MainUI = () => {
 	let state = false
 
 	const [ hideLinks, setHideLinks ] = useState(state)
@@ -32,4 +32,4 @@ const LandingPage = () => {
 	)
 }
 
-export default LandingPage
+export default MainUI

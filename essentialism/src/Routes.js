@@ -2,9 +2,8 @@ import React from 'react'
 
 import { Route, Switch } from 'react-router-dom'
 import ProtectedRoute from './components/utils/ProtectedRoute'
-import LandingPage from './components/MainUI/LandingPage'
-import UserMain from './components/MainUI/UserMain'
-import UserProfile from './components/Profile/UserProfile'
+import MainUI from './components/MainUI/MainUI'
+import UserProfile from './components/Users/UserProfile'
 import Register from './components/UserAuth/Register'
 import Login from './components/UserAuth/Login'
 import NoMatch from './components/NoMatch'
@@ -19,12 +18,10 @@ const Routes = () => {
 		<div className='App'>
 			<Switch>
 				<Route exact path='/'>
-					<LandingPage />
+					<MainUI />
 				</Route>
 
 				<ProtectedRoute exact path='/login' component={Login} />
-
-				<ProtectedRoute exact path='/mainUI' component={UserMain} />
 
 				<ProtectedRoute exact path='/user-profile' component={UserProfile} />
 
