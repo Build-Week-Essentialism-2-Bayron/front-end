@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Register from '../UserAuth/Register'
 import { Link } from 'react-router-dom'
-import { Fade } from 'react-awesome-reveal'
 
 const LandingPage = () => {
 	let state = false
@@ -19,13 +18,11 @@ const LandingPage = () => {
 
 			{hideLinks ? (
 				<>
-					<Fade duration={500}>
 				<div className='main-ui'>
 						<Link to='/mainUI'>Profile</Link>
 						<Link to='/'>Log Out</Link>
 					<Register />
 				</div>
-					</Fade>
 					<h4 onClick={handleClick}>Back</h4>
 					</>
 			) : (

@@ -68,12 +68,14 @@ body,
   margin: 0 auto;
 }
 .App .landing-page .main-ui a {
+  background-color: #e3e3e3;
+  transition: background-color 300ms ease-in-out;
   display: inline-block;
-  width: 100%;
-  height: 2rem;
+  width: 45%;
+  padding: 0.5rem;
   text-decoration: none;
   font-size: 16pt;
-  margin: 0.8rem auto;
+  margin: 0.3rem auto;
 }
 .App .landing-page .main-ui a:hover {
   background-color: #fff;
@@ -95,18 +97,19 @@ body,
   width: 95%;
   color: black;
 }
-.App .landing-page .main-ui .auth-form-wrapper label {
+.App .landing-page .main-ui .auth-form-wrapper .auth-form label {
   margin: 0.5rem auto;
   color: #fff;
 }
-.App .landing-page .main-ui .auth-form-wrapper button {
-  margin: 1rem 0;
+.App .landing-page .main-ui .auth-form-wrapper .auth-form input {
+  font-size: 14pt;
+  text-align: center;
 }
-.App .landing-page .main-ui .auth-form-wrapper a {
-  margin: 0.5rem;
-  font-size: 17pt;
-  font-weight: light;
-  color: #fff;
+.App .landing-page .main-ui .auth-form-wrapper .auth-form .auth-button {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  width: 12rem;
+  font-size: 15pt;
 }
 
 /*# sourceMappingURL=index.css.map */

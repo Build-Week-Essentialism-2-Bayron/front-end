@@ -6,6 +6,7 @@ import LandingPage from './components/MainUI/LandingPage'
 import UserMain from './components/MainUI/UserMain'
 import UserProfile from './components/Profile/UserProfile'
 import Register from './components/UserAuth/Register'
+import Login from './components/UserAuth/Login'
 import NoMatch from './components/NoMatch'
 
 import './styles/index.css'
@@ -21,9 +22,11 @@ const Routes = () => {
 					<LandingPage />
 				</Route>
 
-				<ProtectedRoute exact path='mainUI' component={UserMain} />
+				<ProtectedRoute exact path='/login' component={Login} />
 
-				<ProtectedRoute exact path='user-profile' component={UserProfile} />
+				<ProtectedRoute exact path='/mainUI' component={UserMain} />
+
+				<ProtectedRoute exact path='/user-profile' component={UserProfile} />
 
 				<Route exact path='/register'>
 					<Register />

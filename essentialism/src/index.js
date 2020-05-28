@@ -13,8 +13,8 @@ UserContext.displayName = 'userContext'
 const initState = {
 	user: {
 		projects: [],
-		values: [],
 	},
+	values: [],
 }
 
 ReactDOM.render(
