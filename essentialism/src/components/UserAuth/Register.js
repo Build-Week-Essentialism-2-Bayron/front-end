@@ -1,41 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-import { useHistory, Link } from 'react-router-dom'
+import axios from 'axios'
+
+import { useHistory } from 'react-router-dom'
 
 const Register = props => {
+	const BASE_URL = 'https://essential2us.herokuapp.com/'
+
 	const history = useHistory()
 
 	const [ newUser, setNewUser ] = useState({
-		id: null,
-		name: '',
+		username: '',
 		password: '',
-		type: '',
 	})
 
 	const handleChange = e => {
+		e.preventDefault()
 		setNewUser({
 			...newUser,
 			[e.target.name]: e.target.value,
 		})
-		console.log(newUser)
+		console.log('newUser in handleChange: ', newUser)
 	}
 
-	const handleSubmit = e => {
-		e.preventDefault()
-
+	const handleSubmit = () => {
+		axios
+			.post(`${BASE_URL}/register`, newUser)
+			.then(res => {
+				setNewUser(res.data)
+				console.log('Response from API: ', res)
+			})
+			.catch(err => console.log('ERROR: Data not returned from API ', err))
 		history.push(`/`)
 	}
 
-	// const checkPrevState = (newUser, prevUser) => {
-	//   setPrevUser(props.user);
-	//   if (prevUser.username === newUser.username) {
-	//     setMessage("User already exists in database");
-	//   } else if (prevUser.password === newUser.password) {
-	//     setMessage("Password already exists in database");
-	//   } else return handleSubmit(newUser);
-	// = () => {
-	//   checkPrevState();
-	// };
+	const handleClick = e => {
+		e.preventDefault()
+		history.push('/login')
+	}
 
 	return (
 		<div className='auth-form-wrapper'>
@@ -43,7 +45,13 @@ const Register = props => {
 				{/* Create semantic labels and field names for the values needed to register a new user */}
 
 				<label htmlFor='username'>Enter Username: </label>
-				<input name='name' type='text' value={newUser.name} placeholder='username' onChange={handleChange} />
+				<input
+					name='username'
+					type='text'
+					value={newUser.name}
+					placeholder='username'
+					onChange={handleChange}
+				/>
 
 				<label htmlFor='password'>Enter Password: </label>
 				<input
@@ -54,10 +62,12 @@ const Register = props => {
 					onChange={handleChange}
 				/>
 
-				<button onClick={handleSubmit} className='submit-button'>
+				<button onClick={handleSubmit} className='auth-button'>
 					Sign Up
 				</button>
-				<Link to='/'>Back to login</Link>
+				<button className='auth-button' onClick={e => handleClick(e)}>
+					Back to login
+				</button>
 			</form>
 		</div>
 	)

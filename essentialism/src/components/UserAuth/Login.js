@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 
 // import Spinner from '../Spinner'
 
+import axios from 'axios'
+
 import { useHistory } from 'react-router-dom'
 
 const Login = () => {
+	const BASE_URL = 'https://essential2us.herokuapp.com/'
+
 	let history = useHistory()
 
 	const [ newUser, setNewUser ] = useState({
-		id: '',
 		name: '',
 		password: '',
 	})
@@ -21,27 +24,39 @@ const Login = () => {
 		console.log('This is newUser in the Login.js handleChange: ', newUser)
 	}
 
-	const handleSubmit = e => {
+	const handleSubmit = (e, newUser) => {
 		e.preventDefault()
 		console.log('This is newUser in the Login.js handleSubmit: ', newUser)
-
+		// axios
+		// .post(`${BASE_URL}`)
 		history.replace(`/mainUI/${newUser.id}`)
 	}
+
 	return (
 		<div className='login-form-wrapper'>
 			<form onSubmit={handleSubmit} className='auth-form'>
-				<label htmlFor='username'>Enter Username</label>
-				<input name='name' type='text' value={newUser.name} placeholder='username' onChange={handleChange} />
+				<label htmlFor='username'>
+					Enter Username
+					<input
+						name='name'
+						type='text'
+						value={newUser.name}
+						placeholder='username'
+						onChange={handleChange}
+					/>
+				</label>
 
-				<label htmlFor='password'>Enter Password</label>
-				<input
-					name='password'
-					type='text'
-					value={newUser.password}
-					placeholder='password'
-					onChange={handleChange}
-				/>
-				<button onClick={handleSubmit} className='submit-button'>
+				<label htmlFor='password'>
+					Enter Password
+					<input
+						name='password'
+						type='text'
+						value={newUser.password}
+						placeholder='password'
+						onChange={handleChange}
+					/>
+				</label>
+				<button onClick={e => handleSubmit(e)} className='auth-button'>
 					Log In
 				</button>
 			</form>
