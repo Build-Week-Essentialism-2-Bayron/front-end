@@ -21,7 +21,9 @@ const Routes = () => {
 					<MainUI />
 				</Route>
 
-				<ProtectedRoute exact path='/login' component={Login} />
+				<Route exact path='/login'>
+					<Login />
+				</Route>
 
 				<ProtectedRoute exact path='/user-profile' component={UserProfile} />
 

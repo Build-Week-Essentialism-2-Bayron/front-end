@@ -1,34 +1,44 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import axios from 'axios'
 
 import { useHistory } from 'react-router-dom'
 
 const Register = props => {
+	// set the base Auth URL for API calls
 	const BASE_URL = 'https://essential2us.herokuapp.com/'
 
+	// Hook into history object to push once form submitted
 	const history = useHistory()
 
-	const [ newUser, setNewUser ] = useState({
+	// Saving JSON Web Token to local State
+	const [ token, setToken ] = useState('')
+
+	// save user object to local state to send off to API
+	const [ user, setUser ] = useState({
 		username: '',
 		password: '',
 	})
 
 	const handleChange = e => {
 		e.preventDefault()
-		setNewUser({
-			...newUser,
-			[e.target.name]: e.target.value,
+		const userName = e.target.name.toString().toLowerCase()
+		const pwd = e.target.value.toString().toLowerCase()
+		setUser({
+			username: userName,
+			password: pwd,
 		})
-		console.log('newUser in handleChange: ', newUser)
+		console.log('user in handleChange: ', user)
+		return user
 	}
 
 	const handleSubmit = () => {
 		axios
-			.post(`${BASE_URL}/register`, newUser)
+			.post(`${BASE_URL}/register`, user)
 			.then(res => {
-				setNewUser(res.data)
 				console.log('Response from API: ', res)
+				setToken(localStorage.getItem('token'))
+				console.log('JWT in Register handleSubmit: ', token)
 			})
 			.catch(err => console.log('ERROR: Data not returned from API ', err))
 		history.push(`/`)
@@ -45,19 +55,13 @@ const Register = props => {
 				{/* Create semantic labels and field names for the values needed to register a new user */}
 
 				<label htmlFor='username'>Enter Username: </label>
-				<input
-					name='username'
-					type='text'
-					value={newUser.name}
-					placeholder='username'
-					onChange={handleChange}
-				/>
+				<input name='username' type='text' value={user.name} placeholder='username' onChange={handleChange} />
 
 				<label htmlFor='password'>Enter Password: </label>
 				<input
 					name='password'
 					type='text'
-					value={newUser.password}
+					value={user.password}
 					placeholder='password'
 					onChange={handleChange}
 				/>

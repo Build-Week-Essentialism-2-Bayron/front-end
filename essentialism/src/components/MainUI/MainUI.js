@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Register from '../UserAuth/Register'
+import Login from '../UserAuth/Login'
 import { Link } from 'react-router-dom'
 
 const MainUI = () => {
@@ -12,6 +13,9 @@ const MainUI = () => {
 		setHideLinks(state)
 	}
 
+	const token = localStorage.getItem('token')
+	console.log('Auth Token in MainUI', token)
+
 	return (
 		<div className='landing-page'>
 			<h1>ESSENTIALISM</h1>
@@ -22,6 +26,7 @@ const MainUI = () => {
 						<Link to='/mainUI'>Profile</Link>
 						<Link to='/'>Log Out</Link>
 					<Register />
+					<Login />
 				</div>
 					<h4 onClick={handleClick}>Back</h4>
 					</>

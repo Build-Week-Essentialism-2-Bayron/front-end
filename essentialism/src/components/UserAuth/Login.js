@@ -12,7 +12,7 @@ const Login = () => {
 	let history = useHistory()
 
 	const [ newUser, setNewUser ] = useState({
-		name: '',
+		username: '',
 		password: '',
 	})
 
@@ -24,43 +24,33 @@ const Login = () => {
 		console.log('This is newUser in the Login.js handleChange: ', newUser)
 	}
 
-	const handleSubmit = (e, newUser) => {
+	const handleSubmit = e => {
 		e.preventDefault()
 		console.log('This is newUser in the Login.js handleSubmit: ', newUser)
-		// axios
-		// .post(`${BASE_URL}`)
-		history.replace(`/mainUI/${newUser.id}`)
+		axios
+			.post(`${BASE_URL}`, newUser)
+			.then(res => {
+				console.log('API response in Login: ', res)
+				localStorage.setItem('token', res.data)
+				history.replace('/')
+			})
+			.catch(err => console.log('Error: data not returned from api.', err))
 	}
 
 	return (
-		<div className='login-form-wrapper'>
+		<div className='auth-form-wrapper'>
 			<form onSubmit={handleSubmit} className='auth-form'>
 				<label htmlFor='username'>
 					Enter Username
-					<input
-						name='name'
-						type='text'
-						value={newUser.name}
-						placeholder='username'
-						onChange={handleChange}
-					/>
+					<input name='name' value={newUser.name} placeholder='username' onChange={handleChange} />
 				</label>
 
 				<label htmlFor='password'>
 					Enter Password
-					<input
-						name='password'
-						type='text'
-						value={newUser.password}
-						placeholder='password'
-						onChange={handleChange}
-					/>
+					<input name='password' value={newUser.password} placeholder='password' onChange={handleChange} />
 				</label>
-				<button onClick={e => handleSubmit(e)} className='auth-button'>
-					Log In
-				</button>
+				<button className='auth-button'>Log In</button>
 			</form>
-			s{' '}
 		</div>
 	)
 }

@@ -1,28 +1,17 @@
-import React, { createContext } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
+import { StoreProvider } from './store/StoreContext'
 import Routes from './Routes'
 
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import './styles/index.css'
 
-const UserContext = createContext()
-
-UserContext.displayName = 'userContext'
-
-const initState = {
-	user: {
-		projects: [],
-	},
-	values: [],
-}
-
 ReactDOM.render(
-	<UserContext.Provider value={initState}>
+	<StoreProvider>
 		<Router>
-			{console.log(initState)}
 			<Routes />
 		</Router>
-	</UserContext.Provider>,
+	</StoreProvider>,
 	document.getElementById('root'),
 )
