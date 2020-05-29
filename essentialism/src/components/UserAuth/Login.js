@@ -27,8 +27,8 @@ const Login = () => {
 	const handleSubmit = (e, newUser) => {
 		e.preventDefault()
 		console.log('This is newUser in the Login.js handleSubmit: ', newUser)
-		// axios
-		// .post(`${BASE_URL}`)
+		axios
+		.post(`${BASE_URL}`)
 		history.replace(`/mainUI/${newUser.id}`)
 	}
 
