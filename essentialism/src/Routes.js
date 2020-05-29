@@ -1,11 +1,10 @@
 import React from 'react'
 
 import { Route, Switch } from 'react-router-dom'
-import ProtectedRoute from './components/utils/ProtectedRoute'
+import ProtectedRoute from './components/Values/utils/ProtectedRoute'
 import MainUI from './components/MainUI/MainUI'
 import UserProfile from './components/Users/UserProfile'
 import Register from './components/UserAuth/Register'
-import Login from './components/UserAuth/Login'
 import NoMatch from './components/NoMatch'
 
 import './styles/index.css'
@@ -19,10 +18,6 @@ const Routes = () => {
 			<Switch>
 				<Route exact path='/'>
 					<MainUI />
-				</Route>
-
-				<Route exact path='/login'>
-					<Login />
 				</Route>
 
 				<ProtectedRoute exact path='/user-profile' component={UserProfile} />

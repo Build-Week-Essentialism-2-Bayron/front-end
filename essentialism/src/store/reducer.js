@@ -3,12 +3,7 @@ const initState = {
 	values: [],
 	projects: [],
 	message: '',
-}
-
-const types = {
-	GET_USERS_START: 'GET_USER_START',
-	GET_USERS_START: 'GET_USER_SUCCESS',
-	USER_FAILURE: 'USER_FAILURE',
+	isLoading: false,
 }
 
 // reducer function to modify state
@@ -35,4 +30,4 @@ const reducer = (state = initState, action) => {
 	}
 }
 
-export { initState, types, reducer }
+export { initState, reducer }

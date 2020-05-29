@@ -26,7 +26,6 @@ const MainUI = () => {
 						<Link to='/mainUI'>Profile</Link>
 						<Link to='/'>Log Out</Link>
 					<Register />
-					<Login />
 				</div>
 					<h4 onClick={handleClick}>Back</h4>
 					</>
