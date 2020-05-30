@@ -1,34 +1,29 @@
 import axios from 'axios'
 
 // action types for user registration and login
-export const USER_REGISTER_START = 'USER_REGISTER_START'
 export const USER_REGISTER_SUCCESS = 'USER_REGISTER_SUCCESS'
 
-export const GET_TOKEN_START = 'GET_TOKEN_START'
-export const GET_TOKEN_SUCCESS = 'GET_TOKEN_SUCCESS'
-
-export const USER_LOGIN_START = 'USER_LOGIN_START'
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS'
+
+export const USER_LOGOUT = 'USER_LOGOUT'
 
 export const USER_FAILURE = 'USER_FAILURE'
 
-export const BASE_URL = 'https://essential2us.herokuapp.com/'
+export const BASE_URL = 'https://essential2us.herokuapp.com'
 
-// action creator function for registering a user. takes in the newUser object sent from the Register component, and returns a dispatch call to modify the global state via the reducer function
+// action creator function for registering a user. takes in the newUser object sent from the Register component, saves the user id returned from the response, and returns a dispatch call to modify the global state via the reducer function
 
 export const userRegister = newUser => dispatch => {
-	console.log('newUser at userRegister action creator: ', newUser)
-	dispatch({
-		type: USER_REGISTER_START,
-		newUser,
-	})
 	axios
-		.post(`${BASE_URL}/register`, newUser)
+		.post(`${BASE_URL}/auth/register`, newUser)
 		.then(res => {
 			localStorage.setItem('userId', res.data.id)
 			dispatch({
 				type: USER_REGISTER_SUCCESS,
-				payload: res.data,
+				payload: {
+					message: res.data.message,
+					id: res.data.id,
+				},
 			})
 			console.log('Result of user registration: ', res.data)
 		})
@@ -40,28 +35,35 @@ export const userRegister = newUser => dispatch => {
 			})
 		})
 }
+
 // action creator function for user login. takes in credentials saved to newUser object sent from he Login component. Saves JWT to localStorage and returns dispatch to mutate global state.a1
 
-export const userLogin = newUser => dispatch => {
-	dispatch({
-		type: USER_LOGIN_START,
-	})
+export const userLogin = credentials => dispatch => {
 	axios
-		.post(`${BASE_URL}/login`, newUser)
+		.post(`${BASE_URL}/auth/login`, credentials)
 		.then(res => {
 			localStorage.setItem('token', res.data.token)
 			dispatch({
 				type: USER_LOGIN_SUCCESS,
-				payload: res.data,
-				message: `SUCCESS! ${res.data} was returned`,
+				payload: {
+					message: res.data.message,
+				},
 			})
 		})
 		.catch(err => {
-			console.log('ERROR: incorrect username/ password', err)
+			console.log('ERROR: incorrect username/ password', err.message)
 			dispatch({
 				type: USER_FAILURE,
 				payload: err,
-				message: `ERROR: ${err} was returned`,
 			})
 		})
+}
+
+// action creator function for handling user logout. returns store to initial state and deletes JWT
+
+export const logout = () => dispatch => {
+	localStorage.removeItem('token')
+	dispatch({
+		type: USER_LOGOUT,
+	})
 }

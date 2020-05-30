@@ -4,7 +4,6 @@ import { Route, Switch } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute'
 import MainUI from './components/MainUI/MainUI'
 import UserMain from './components/Users/UserMain'
-import Register from './components/UserAuth/Register'
 import Login from './components/UserAuth/Login'
 import NoMatch from './components/NoMatch'
 
@@ -17,23 +16,21 @@ import './styles/index.css'
 const Routes = () => {
 	return (
 		<div className='App'>
-			<Switch>
-				<Route exact path='/'>
-					<MainUI />
-				</Route>
+			<div className='main-ui'>
+				<Switch>
+					<Route exact path='/'>
+						<MainUI />
+					</Route>
 
-				<ProtectedRoute exact path='/main' component={UserMain} />
+					<ProtectedRoute exact path='/main' component={UserMain} />
 
-				<Route exact path='/register'>
-					<Register />
-				</Route>
+					<Route exact path='/login'>
+						<Login />
+					</Route>
 
-				<Route exact path='/login'>
-					<Login />
-				</Route>
-
-				<Route component={NoMatch} />
-			</Switch>
+					<Route component={NoMatch} />
+				</Switch>
+			</div>
 		</div>
 	)
 }

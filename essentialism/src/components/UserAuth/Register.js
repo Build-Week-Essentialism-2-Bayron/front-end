@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import { useHistory } from 'react-router-dom'
 
-const Register = ({ isLoading, userRegister }) => {
+const Register = ({ userRegister }) => {
 	// Hook into history object to push once form submitted
 	const history = useHistory()
 
@@ -26,14 +26,10 @@ const Register = ({ isLoading, userRegister }) => {
 		return newUser
 	}
 
-	const handleSubmit = e => {
+	const handleSubmit = () => {
 		userRegister(newUser)
 		console.log('User register in Register component: ', newUser)
-		history.push(`/`)
-	}
-
-	const handleClick = () => {
-		history.push('/login')
+		history.replace(`/login`)
 	}
 
 	return (
@@ -46,7 +42,7 @@ const Register = ({ isLoading, userRegister }) => {
 					<input
 						name='username'
 						type='text'
-						value={newUser.name}
+						// value={newUser.name}
 						placeholder='username'
 						onChange={handleChange}
 					/>
@@ -63,7 +59,7 @@ const Register = ({ isLoading, userRegister }) => {
 					/>
 				</label>
 
-				<button type='submit' className='auth-button'>
+				<button className='auth-button' type='submit'>
 					Sign Up
 				</button>
 			</form>

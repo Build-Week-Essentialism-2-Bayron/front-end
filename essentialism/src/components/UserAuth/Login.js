@@ -6,63 +6,55 @@ import { useHistory } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 
-import Spinner from '../Spinner'
-
-const Login = ({ isLoading, userLogin }) => {
+const Login = ({ userLogin }) => {
 	let history = useHistory()
 
-	const [ newUser, setNewUser ] = useState({
-		username: '',
-		password: '',
-	})
+	const [ credentials, setCredentials ] = useState({})
 
 	const handleChange = e => {
-		setNewUser({
-			...newUser,
+		setCredentials({
+			...credentials,
 			[e.target.name]: e.target.value,
 		})
-		console.log('This is newUser in the Login.js handleChange: ', newUser)
+		console.log('This is credentials in the Login.js handleChange: ', credentials)
 	}
 
-	const handleSubmit = e => {
-		e.preventDefault()
-		console.log('This is newUser in the Login.js handleSubmit: ', newUser)
-		userLogin(newUser)
+	const handleSubmit = () => {
+		console.log('This is credentials in the Login.js handleSubmit: ', credentials)
+		userLogin(credentials)
 		history.push('/Main')
 	}
 
 	return (
 		<div className='auth-form-wrapper'>
-			{isLoading ? (
-				<form onSubmit={handleSubmit} className='auth-form'>
-					<label htmlFor='username'>
-						Enter Username
-						<input name='name' value={newUser.name} placeholder='username' onChange={handleChange} />
-					</label>
+			<form onSubmit={handleSubmit} className='auth-form'>
+				<label htmlFor='username'>
+					Enter Username
+					<input
+						name='username'
+						type='text'
+						// value={credentials.name}
+						placeholder='username'
+						onChange={handleChange}
+					/>
+				</label>
 
-					<label htmlFor='password'>
-						Enter Password
-						<input
-							name='password'
-							value={newUser.password}
-							placeholder='password'
-							onChange={handleChange}
-						/>
-					</label>
-					<button className='auth-button'>Log In</button>
-				</form>
-			) : (
-				<Spinner />
-			)}
+				<label htmlFor='password'>
+					Enter Password
+					<input
+						name='password'
+						type='password'
+						// value={credentials.password}
+						placeholder='password'
+						onChange={handleChange}
+					/>
+				</label>
+				<button className='auth-button' type='submit'>
+					Log In
+				</button>
+			</form>
 		</div>
 	)
 }
 
-const mapStateToProps = state => {
-	return {
-		isLoading: state.isLoading,
-		user: state.user,
-	}
-}
-
-export default connect(mapStateToProps, { userLogin })(Login)
+export default connect(null, { userLogin })(Login)
