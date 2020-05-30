@@ -39,6 +39,13 @@ body,
 .App h4 h4::hover {
   background-color: #fff;
 }
+.App .spinner-center {
+  position: absolute;
+  background-color: black;
+}
+.App .spinner-center .spinner {
+  height: inherit;
+}
 .App .landing-page {
   min-height: 60%;
   height: auto;

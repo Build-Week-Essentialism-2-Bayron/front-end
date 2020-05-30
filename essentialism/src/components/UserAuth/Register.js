@@ -41,27 +41,31 @@ const Register = ({ isLoading, userRegister }) => {
 			<form onSubmit={handleSubmit} className='auth-form'>
 				{/* Create semantic labels and field names for the values needed to register a new newUser */}
 
-				<label htmlFor='username'>Enter Username: </label>
-				<input
-					name='username'
-					type='text'
-					value={newUser.name}
-					placeholder='username'
-					onChange={handleChange}
-				/>
+				<label htmlFor='username'>
+					Enter Username:
+					<input
+						name='username'
+						type='text'
+						value={newUser.name}
+						placeholder='username'
+						onChange={handleChange}
+					/>
+				</label>
 
-				<label htmlFor='password'>Enter Password: </label>
-				<input
-					name='password'
-					type='password'
-					value={newUser.password}
-					placeholder='password'
-					onChange={handleChange}
-				/>
+				<label htmlFor='password'>
+					Enter Password:
+					<input
+						name='password'
+						type='password'
+						// value={newUser.password}
+						placeholder='password'
+						onChange={handleChange}
+					/>
+				</label>
 
-				<input type='submit' className='auth-button'>
+				<button type='submit' className='auth-button'>
 					Sign Up
-				</input>
+				</button>
 			</form>
 		</div>
 	)
