@@ -4,15 +4,15 @@ import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
 
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { thunk } from 'redux-thunk'
 import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
 
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import './styles/index.css'
-
-import { rootReducer } from 'redux/reducers/index'
+import { rootReducer } from './redux/reducers/index'
 import Routes from './Routes'
+
+import './styles/index.css'
 
 const actionsLogger = ({ getState }) => next => action => {
 	console.log('Current State : ', getState())

@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import { useHistory } from 'react-router-dom'
 
-const Register = props => {
+const Register = ({ isLoading, userRegister }) => {
 	// Hook into history object to push once form submitted
 	const history = useHistory()
 
@@ -27,7 +27,7 @@ const Register = props => {
 	}
 
 	const handleSubmit = e => {
-		props.userRegister(newUser)
+		userRegister(newUser)
 		console.log('User register in Register component: ', newUser)
 		history.push(`/`)
 	}

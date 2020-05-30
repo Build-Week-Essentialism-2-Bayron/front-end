@@ -2,8 +2,8 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import ProtectedRoute from './components/ProtectedRoute'
-import UserAuth from './components/MainUI/MainUI'
-import UserProfile from './components/Users/UserProfile'
+import MainUI from './components/MainUI/MainUI'
+import UserMain from './components/Users/UserMain'
 import Register from './components/UserAuth/Register'
 import NoMatch from './components/NoMatch'
 
@@ -18,10 +18,10 @@ const Routes = () => {
 		<div className='App'>
 			<Switch>
 				<Route exact path='/'>
-					<UserAuth />
+					<MainUI />
 				</Route>
 
-				<ProtectedRoute exact path='/user-profile' component={UserProfile} />
+				<ProtectedRoute exact path='/main' component={UserMain} />
 
 				<Route exact path='/register'>
 					<Register />

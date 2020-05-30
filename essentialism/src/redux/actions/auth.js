@@ -39,30 +39,29 @@ export const userRegister = newUser => dispatch => {
 				payload: err.message,
 			})
 		})
+}
+// action creator function for user login. takes in credentials saved to newUser object sent from he Login component. Saves JWT to localStorage and returns dispatch to mutate global state.a1
 
-	// action creator function for user login. takes in credentials saved to newUser object sent from he Login component. Saves JWT to localStorage and returns dispatch to mutate global state.a1
-
-	export const userLogin = newUser => dispatch => {
-		dispatch({
-			type: USER_LOGIN_START,
+export const userLogin = newUser => dispatch => {
+	dispatch({
+		type: USER_LOGIN_START,
+	})
+	axios
+		.post(`${BASE_URL}/login`, newUser)
+		.then(res => {
+			localStorage.setItem('token', res.data.token)
+			dispatch({
+				type: USER_LOGIN_SUCCESS,
+				payload: res.data,
+				message: `SUCCESS! ${res.data} was returned`,
+			})
 		})
-		axios
-			.post(`${BASE_URL}/login`, newUser)
-			.then(res => {
-				localStorage.setItem('token', res.data.token)
-				dispatch({
-					type: USER_LOGIN_SUCCESS,
-					payload: res.data,
-					message: `SUCCESS! ${res.data} was returned`,
-				})
+		.catch(err => {
+			console.log('ERROR: incorrect username/ password', err)
+			dispatch({
+				type: USER_FAILURE,
+				payload: err,
+				message: `ERROR: ${err} was returned`,
 			})
-			.catch(err => {
-				console.log('ERROR: incorrect username/ password', err)
-				dispatch({
-					type: USER_FAILURE,
-					payload: err,
-					message: `ERROR: ${err} was returned`,
-				})
-			})
-	}
+		})
 }

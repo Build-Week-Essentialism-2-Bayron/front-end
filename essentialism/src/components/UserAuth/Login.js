@@ -4,9 +4,11 @@ import { userLogin } from '../../redux/actions/auth'
 
 import { useHistory } from 'react-router-dom'
 
+import { connect } from 'react-redux'
+
 import Spinner from '../Spinner'
 
-const Login = () => {
+const Login = ({ isLoading, userLogin }) => {
 	let history = useHistory()
 
 	const [ newUser, setNewUser ] = useState({
