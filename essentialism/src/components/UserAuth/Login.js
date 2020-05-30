@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 
-// import Spinner from '../Spinner'
-
-import axios from 'axios'
+import { userLogin } from '../../redux/actions/auth'
 
 import { useHistory } from 'react-router-dom'
 
-const Login = () => {
-	const BASE_URL = 'https://essential2us.herokuapp.com/'
+import Spinner from '../Spinner'
 
+const Login = () => {
 	let history = useHistory()
 
 	const [ newUser, setNewUser ] = useState({
@@ -27,32 +25,42 @@ const Login = () => {
 	const handleSubmit = e => {
 		e.preventDefault()
 		console.log('This is newUser in the Login.js handleSubmit: ', newUser)
-		axios
-			.post(`${BASE_URL}`, newUser)
-			.then(res => {
-				console.log('API response in Login: ', res)
-				localStorage.setItem('token', res.data)
-				history.replace('/')
-			})
-			.catch(err => console.log('Error: data not returned from api.', err))
+		userLogin(newUser)
+		history.push('/Main')
 	}
 
 	return (
 		<div className='auth-form-wrapper'>
-			<form onSubmit={handleSubmit} className='auth-form'>
-				<label htmlFor='username'>
-					Enter Username
-					<input name='name' value={newUser.name} placeholder='username' onChange={handleChange} />
-				</label>
+			{isLoading ? (
+				<form onSubmit={handleSubmit} className='auth-form'>
+					<label htmlFor='username'>
+						Enter Username
+						<input name='name' value={newUser.name} placeholder='username' onChange={handleChange} />
+					</label>
 
-				<label htmlFor='password'>
-					Enter Password
-					<input name='password' value={newUser.password} placeholder='password' onChange={handleChange} />
-				</label>
-				<button className='auth-button'>Log In</button>
-			</form>
+					<label htmlFor='password'>
+						Enter Password
+						<input
+							name='password'
+							value={newUser.password}
+							placeholder='password'
+							onChange={handleChange}
+						/>
+					</label>
+					<button className='auth-button'>Log In</button>
+				</form>
+			) : (
+				<Spinner />
+			)}
 		</div>
 	)
 }
 
-export default Login
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+		user: state.user,
+	}
+}
+
+export default connect(mapStateToProps, { userLogin })(Login)

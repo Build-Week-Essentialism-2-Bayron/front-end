@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-const UserProfile = () => {
+const UserMain = () => {
 	// TODO: Re-Learn HOC
 	// HOC usage need brush up on.
 
@@ -25,4 +25,4 @@ const UserProfile = () => {
 	)
 }
 
-export default UserProfile
+export default UserMain

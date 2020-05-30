@@ -1,6 +1,5 @@
 import match from 'conditional-expression'
 import axios from 'axios'
-import { types } from './actions'
 
 const BASE_URL = 'https://essential2us.herokuapp.com/'
 

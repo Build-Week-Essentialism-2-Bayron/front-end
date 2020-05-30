@@ -1,80 +1,70 @@
 import React, { useState } from 'react'
 
-import axios from 'axios'
+import { userRegister } from '../../redux/actions/auth'
+
+import { connect } from 'react-redux'
 
 import { useHistory } from 'react-router-dom'
 
 const Register = props => {
-	// set the base Auth URL for API calls
-	const BASE_URL = 'https://essential2us.herokuapp.com/'
-
 	// Hook into history object to push once form submitted
 	const history = useHistory()
 
-	// Saving JSON Web Token to local State
-	const [ token, setToken ] = useState('')
-
-	// save user object to local state to send off to API
-	const [ user, setUser ] = useState({
+	// save newUser object to local state to send off to API
+	const [ newUser, setNewUser ] = useState({
 		username: '',
 		password: '',
 	})
 
 	const handleChange = e => {
 		e.preventDefault()
-		const userName = e.target.name.toString().toLowerCase()
-		const pwd = e.target.value.toString().toLowerCase()
-		setUser({
-			username: userName,
-			password: pwd,
+		setNewUser({
+			...newUser,
+			[e.target.name]: e.target.value,
 		})
-		console.log('user in handleChange: ', user)
-		return user
+		console.log('newUser in handleChange: ', newUser)
+		return newUser
 	}
 
-	const handleSubmit = () => {
-		axios
-			.post(`${BASE_URL}/register`, user)
-			.then(res => {
-				console.log('Response from API: ', res)
-				setToken(localStorage.getItem('token'))
-				console.log('JWT in Register handleSubmit: ', token)
-			})
-			.catch(err => console.log('ERROR: Data not returned from API ', err))
+	const handleSubmit = e => {
+		props.userRegister(newUser)
+		console.log('User register in Register component: ', newUser)
 		history.push(`/`)
 	}
 
-	const handleClick = e => {
-		e.preventDefault()
+	const handleClick = () => {
 		history.push('/login')
 	}
 
 	return (
 		<div className='auth-form-wrapper'>
 			<form onSubmit={handleSubmit} className='auth-form'>
-				{/* Create semantic labels and field names for the values needed to register a new user */}
+				{/* Create semantic labels and field names for the values needed to register a new newUser */}
 
 				<label htmlFor='username'>Enter Username: </label>
-				<input name='username' type='text' value={user.name} placeholder='username' onChange={handleChange} />
+				<input
+					name='username'
+					type='text'
+					value={newUser.name}
+					placeholder='username'
+					onChange={handleChange}
+				/>
 
 				<label htmlFor='password'>Enter Password: </label>
 				<input
 					name='password'
-					type='text'
-					value={user.password}
+					type='password'
+					value={newUser.password}
 					placeholder='password'
 					onChange={handleChange}
 				/>
 
-				<button onClick={handleSubmit} className='auth-button'>
+				<input type='submit' className='auth-button'>
 					Sign Up
-				</button>
-				<button className='auth-button' onClick={e => handleClick(e)}>
-					Back to login
-				</button>
+				</input>
 			</form>
 		</div>
 	)
 }
 
-export default Register
+export default connect(null, { userRegister })(Register)
