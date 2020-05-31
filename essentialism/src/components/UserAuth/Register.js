@@ -40,15 +40,18 @@ const Register = ({ userRegister }) => {
 	return (
 		<div className='auth-form-wrapper'>
 			<form onSubmit={e => handleSubmit(e)} className='auth-form'>
+				<h3>Sign Up</h3>
 				{/* Create semantic labels and field names for the values needed to register a new newUser */}
 
 				<label htmlFor='username'>
-					Enter Username:
+					Enter Username
+					<br />
 					<input name='username' type='text' placeholder='username' onChange={handleChange} />
 				</label>
 
 				<label htmlFor='password'>
-					Enter Password:
+					Enter Password
+					<br />
 					<input name='password' type='password' placeholder='password' onChange={handleChange} />
 				</label>
 				<button type='submit' className='auth-button'>

@@ -2,48 +2,46 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../../redux/actions/auth'
+import Spinner from '../Spinner'
 
-
-const MainUI = ({ user , logout}) => {
-	let state = false
-    let prevState = false 
-
-	const [ hideLinks, setHideLinks ] = useState(state)
-	
+const MainUI = ({ isLoading, logout }) => {
+	const [ hideLinks, setHideLinks ] = useState(false)
 
 	const handleClick = () => {
-	state = !state
-	setHideLinks(state)
+		setHideLinks(!hideLinks)
 	}
 
 	const handleLogout = () => {
 		logout()
-		state = prevState
-		setHideLinks(state)
+		setHideLinks(!hideLinks)
 	}
 
-
-	return (
-		<>
-
+	return !isLoading ? (
+		<div className='main-ui'>
 			{hideLinks ? (
-				<>
-						<Link to='/' onClick={handleLogout}>Log Out</Link>
-						<Link to='/login'>Log In</Link>
-						<Link to='/register'>Sign Up</Link>
-					<h4 onClick={handleClick}>Back</h4>
-					</>
+				<div className='main-links'>
+					<Link to='/login' onClick={handleLogout}>
+						Log Out
+					</Link>
+					<Link to='/login'>Log In</Link>
+					<Link to='/register'>Sign Up</Link>
+					<Link to='/' onClick={handleClick}>
+						Back
+					</Link>
+				</div>
 			) : (
 				<h4 onClick={handleClick}>Click Here to Start</h4>
 			)}
-		</>
+		</div>
+	) : (
+		<Spinner />
 	)
 }
 
-// const mapStateToProps = state => {
-// 	return {
-// 		user: state.user
-// 	}
-// }
+const mapStateToProps = state => {
+	return {
+		isLoggedIn: state.isLoggedIn,
+	}
+}
 
-export default connect(null, { logout })(MainUI)
+export default connect(mapStateToProps, { logout })(MainUI)

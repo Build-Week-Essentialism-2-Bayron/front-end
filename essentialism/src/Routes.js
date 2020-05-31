@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import ProtectedRoute from './components/ProtectedRoute'
 import MainUI from './components/MainUI/MainUI'
@@ -15,14 +16,14 @@ import './styles/index.css'
 
 // The ProtectedRoute component handles client-side authentication via JSON Web Token.
 
-const Routes = () => {
+const Routes = ({ isLoggedIn }) => {
 	return (
 		<div className='App'>
-			<div className='main-ui'>
+			<div className='main-ui-wrapper'>
 				<h1>ESSENTIALISM</h1>
 
 				<Switch>
-					<ProtectedRoute exact path='/main' component={UserMain} />
+					<ProtectedRoute exact path='/user' component={UserMain} />
 
 					<ProtectedRoute exact path='/values' component={ValuesList} />
 
@@ -45,4 +46,10 @@ const Routes = () => {
 	)
 }
 
-export default Routes
+const mapStateToProps = state => {
+	return {
+		isLoggedIn: state.isLoggedIn,
+	}
+}
+
+export default connect(mapStateToProps, null)(Routes)

@@ -9,6 +9,8 @@ import {
 
 import { FETCH_VALUES_START, FETCH_VALUES_SUCCESS, FETCH_FAILURE } from '../actions/values'
 
+import { DELETE_USER_START, DELETE_USER_SUCCESS } from '../actions/user'
+
 export const initialState = {
 	isLoading: false,
 
@@ -89,6 +91,15 @@ export const rootReducer = (state = initialState, action) => {
 				isLoading: false,
 				message: 'ERROR: Data not returned from API',
 			}
+
+		case DELETE_USER_START:
+			return {
+				...state,
+				isLoading: true,
+				message: 'WARNING deleting user',
+			}
+		case DELETE_USER_SUCCESS:
+			return initialState
 
 		default:
 			return state

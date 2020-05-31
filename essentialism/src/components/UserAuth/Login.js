@@ -27,7 +27,7 @@ const Login = ({ isLoading, userLogin }) => {
 		console.log('This is credentials in the Login.js handleSubmit: ', credentials)
 		userLogin(credentials)
 		setTimeout(() => {
-			history.push('/main')
+			history.push('/user')
 		}, 1000)
 	}
 
@@ -39,8 +39,10 @@ const Login = ({ isLoading, userLogin }) => {
 	return (
 		<div className='auth-form-wrapper'>
 			<form onSubmit={e => handleSubmit(e)} className='auth-form'>
+				<h3>Log In</h3>
 				<label htmlFor='username'>
 					Enter Username
+					<br />
 					<input
 						name='username'
 						type='text'
@@ -51,6 +53,7 @@ const Login = ({ isLoading, userLogin }) => {
 				</label>
 				<label htmlFor='password'>
 					Enter Password
+					<br />
 					<input
 						name='password'
 						type='password'
