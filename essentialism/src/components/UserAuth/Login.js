@@ -1,68 +1,81 @@
 import React, { useState } from 'react'
 
-// import Spinner from '../Spinner'
-
-import axios from 'axios'
+import { userLogin } from '../../redux/actions/auth'
 
 import { useHistory } from 'react-router-dom'
 
-const Login = () => {
-	const BASE_URL = 'https://essential2us.herokuapp.com/'
+import { connect } from 'react-redux'
 
+const Login = ({ isLoading, userLogin }) => {
 	let history = useHistory()
 
-	const [ newUser, setNewUser ] = useState({
-		name: '',
+	const [ credentials, setCredentials ] = useState({
+		username: '',
 		password: '',
 	})
 
 	const handleChange = e => {
-		setNewUser({
-			...newUser,
+		setCredentials({
+			...credentials,
 			[e.target.name]: e.target.value,
 		})
-		console.log('This is newUser in the Login.js handleChange: ', newUser)
+	}
+	console.log('This is credentials in the Login.js handleChange: ', credentials)
+
+	const handleSubmit = e => {
+		e.preventDefault()
+		console.log('This is credentials in the Login.js handleSubmit: ', credentials)
+		userLogin(credentials)
+		setTimeout(() => {
+			history.push('/user')
+		}, 1000)
 	}
 
-	const handleSubmit = (e, newUser) => {
+	const handleClick = e => {
 		e.preventDefault()
-		console.log('This is newUser in the Login.js handleSubmit: ', newUser)
-		// axios
-		// .post(`${BASE_URL}`)
-		history.replace(`/mainUI/${newUser.id}`)
+		history.goBack()
 	}
 
 	return (
-		<div className='login-form-wrapper'>
-			<form onSubmit={handleSubmit} className='auth-form'>
+		<div className='auth-form-wrapper'>
+			<form onSubmit={e => handleSubmit(e)} className='auth-form'>
+				<h3>Log In</h3>
 				<label htmlFor='username'>
 					Enter Username
+					<br />
 					<input
-						name='name'
+						name='username'
 						type='text'
-						value={newUser.name}
 						placeholder='username'
 						onChange={handleChange}
+						value={credentials.username}
 					/>
 				</label>
-
 				<label htmlFor='password'>
 					Enter Password
+					<br />
 					<input
 						name='password'
-						type='text'
-						value={newUser.password}
+						type='password'
 						placeholder='password'
 						onChange={handleChange}
+						value={credentials.password}
 					/>
 				</label>
-				<button onClick={e => handleSubmit(e)} className='auth-button'>
+				<button type='submit' className='auth-button'>
 					Log In
 				</button>
+				<button type='button' className='auth-button' onClick={e => handleClick(e)}>
+					Cancel
+				</button>
 			</form>
-			s{' '}
 		</div>
 	)
 }
 
-export default Login
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+	}
+}
+export default connect(mapStateToProps, { userLogin })(Login)
