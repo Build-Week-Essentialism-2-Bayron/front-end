@@ -5,14 +5,17 @@ import { fetchValues } from '../../redux/actions/values'
 const ValuesList = ({ values, fetchValues }) => {
 	const [ list, setList ] = useState([])
 
-	useEffect(() => {
-		const vals = fetchValues()
-		console.log(vals)
-		setList(vals)
-	}, [])
+	useEffect(
+		() => {
+			fetchValues()
+			console.log(values)
+			setList(values)
+		},
+		[ values ],
+	)
 
 	return (
-		<div>
+		<div className='values-list'>
 			{list.map(value => {
 				return <h5>{value}</h5>
 			})}

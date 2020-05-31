@@ -14,7 +14,7 @@ export const deleteUser = (ID, token) => dispatch => {
 		type: DELETE_USER_START,
 	})
 	axios
-		.delete(`${BASE_URL}/users/${ID}`, { headers: { Authorization: token } })
+		.delete(`${BASE_URL}/users/${ID}`, { headers: { Authorization: `Bearer ${token}` } })
 		.then(res => {
 			dispatch({
 				type: DELETE_USER_SUCCESS,
