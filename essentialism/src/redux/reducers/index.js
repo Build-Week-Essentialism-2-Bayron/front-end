@@ -32,7 +32,6 @@ export const rootReducer = (state = initialState, action) => {
 				message: action.payload.message,
 				isLoading: false,
 				isLoggedIn: true,
-				user: action.payload,
 			}
 
 		case USER_FAILURE:

@@ -1,19 +1,28 @@
 import React, { useState } from 'react'
-import Register from '../UserAuth/Register'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { logout } from '../../redux/actions/auth'
 
-const MainUI = () => {
+import Register from '../UserAuth/Register'
+
+const MainUI = ({ user , logout}) => {
 	let state = false
+    let prevState = false 
 
 	const [ hideLinks, setHideLinks ] = useState(state)
+	
 
 	const handleClick = () => {
-		state = !state
+	state = !state
+	setHideLinks(state)
+	}
+
+	const handleLogout = () => {
+		logout()
+		state = prevState
 		setHideLinks(state)
 	}
 
-	const token = localStorage.getItem('token')
-	console.log('Auth Token in MainUI', token)
 
 	return (
 		<>
@@ -22,7 +31,7 @@ const MainUI = () => {
 			{hideLinks ? (
 				<>
 				<div className='main-ui'>
-						<Link to='/user'>Profile</Link>
+						<Link to='/' onClick={handleLogout}>Log Out</Link>
 						<Link to='/login'>Log In</Link>
 					<Register />
 				</div>
@@ -35,4 +44,10 @@ const MainUI = () => {
 	)
 }
 
-export default MainUI
+// const mapStateToProps = state => {
+// 	return {
+// 		user: state.user
+// 	}
+// }
+
+export default connect(null, { logout })(MainUI)

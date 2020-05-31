@@ -30,28 +30,14 @@ const Login = ({ userLogin }) => {
 			<form onSubmit={handleSubmit} className='auth-form'>
 				<label htmlFor='username'>
 					Enter Username
-					<input
-						name='username'
-						type='text'
-						// value={credentials.name}
-						placeholder='username'
-						onChange={handleChange}
-					/>
+					<input name='username' type='text' placeholder='username' onChange={handleChange} />
 				</label>
 
 				<label htmlFor='password'>
 					Enter Password
-					<input
-						name='password'
-						type='password'
-						// value={credentials.password}
-						placeholder='password'
-						onChange={handleChange}
-					/>
+					<input name='password' type='password' placeholder='password' onChange={handleChange} />
 				</label>
-				<button className='auth-button' type='submit'>
-					Log In
-				</button>
+				<button className='auth-button'>Log In</button>
 			</form>
 		</div>
 	)

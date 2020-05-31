@@ -39,29 +39,15 @@ const Register = ({ userRegister }) => {
 
 				<label htmlFor='username'>
 					Enter Username:
-					<input
-						name='username'
-						type='text'
-						// value={newUser.name}
-						placeholder='username'
-						onChange={handleChange}
-					/>
+					<input name='username' type='text' placeholder='username' onChange={handleChange} />
 				</label>
 
 				<label htmlFor='password'>
 					Enter Password:
-					<input
-						name='password'
-						type='password'
-						// value={newUser.password}
-						placeholder='password'
-						onChange={handleChange}
-					/>
+					<input name='password' type='password' placeholder='password' onChange={handleChange} />
 				</label>
 
-				<button className='auth-button' type='submit'>
-					Sign Up
-				</button>
+				<button className='auth-button'>Sign Up</button>
 			</form>
 		</div>
 	)

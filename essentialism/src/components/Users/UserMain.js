@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { logout } from '../../redux/actions/auth'
 
-const UserMain = () => {
+const UserMain = ({ logout }) => {
 	return (
 		<div className='user-profile-container'>
 			<nav>
@@ -9,7 +11,9 @@ const UserMain = () => {
 				<div className='user-links'>
 					<Link to='/projects'>Add A Project</Link>
 					<Link to='/main'>My-Home</Link>
-					<Link to='/'>Log Out</Link>
+					<Link to='/' onClick={logout}>
+						Log Out
+					</Link>
 				</div>
 			</nav>
 
@@ -22,4 +26,4 @@ const UserMain = () => {
 	)
 }
 
-export default UserMain
+export default connect(null, { logout })(UserMain)
