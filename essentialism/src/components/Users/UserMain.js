@@ -9,7 +9,7 @@ const UserMain = ({ logout }) => {
 			<nav>
 				<h3>Essentialism</h3>
 				<div className='user-links'>
-					<Link to='/projects'>Add A Project</Link>
+					<Link to='/values'>Add A Project</Link>
 					<Link to='/main'>My-Home</Link>
 					<Link to='/' onClick={logout}>
 						Log Out

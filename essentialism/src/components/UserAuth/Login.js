@@ -6,41 +6,73 @@ import { useHistory } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 
-const Login = ({ userLogin }) => {
+const Login = ({ isLoading, userLogin }) => {
 	let history = useHistory()
 
-	const [ credentials, setCredentials ] = useState({})
+	const [ credentials, setCredentials ] = useState({
+		username: '',
+		password: '',
+	})
 
 	const handleChange = e => {
 		setCredentials({
 			...credentials,
 			[e.target.name]: e.target.value,
 		})
-		console.log('This is credentials in the Login.js handleChange: ', credentials)
 	}
+	console.log('This is credentials in the Login.js handleChange: ', credentials)
 
-	const handleSubmit = () => {
+	const handleSubmit = e => {
+		e.preventDefault()
 		console.log('This is credentials in the Login.js handleSubmit: ', credentials)
 		userLogin(credentials)
-		history.push('/Main')
+		setTimeout(() => {
+			history.push('/main')
+		}, 1000)
+	}
+
+	const handleClick = e => {
+		e.preventDefault()
+		history.goBack()
 	}
 
 	return (
 		<div className='auth-form-wrapper'>
-			<form onSubmit={handleSubmit} className='auth-form'>
+			<form onSubmit={e => handleSubmit(e)} className='auth-form'>
 				<label htmlFor='username'>
 					Enter Username
-					<input name='username' type='text' placeholder='username' onChange={handleChange} />
+					<input
+						name='username'
+						type='text'
+						placeholder='username'
+						onChange={handleChange}
+						value={credentials.username}
+					/>
 				</label>
-
 				<label htmlFor='password'>
 					Enter Password
-					<input name='password' type='password' placeholder='password' onChange={handleChange} />
+					<input
+						name='password'
+						type='password'
+						placeholder='password'
+						onChange={handleChange}
+						value={credentials.password}
+					/>
 				</label>
-				<button className='auth-button'>Log In</button>
+				<button type='submit' className='auth-button'>
+					Log In
+				</button>
+				<button type='button' className='auth-button' onClick={e => handleClick(e)}>
+					Cancel
+				</button>
 			</form>
 		</div>
 	)
 }
 
-export default connect(null, { userLogin })(Login)
+const mapStateToProps = state => {
+	return {
+		isLoading: state.isLoading,
+	}
+}
+export default connect(mapStateToProps, { userLogin })(Login)

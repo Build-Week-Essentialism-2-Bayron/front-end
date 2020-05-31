@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../../redux/actions/auth'
 
-import Register from '../UserAuth/Register'
 
 const MainUI = ({ user , logout}) => {
 	let state = false
@@ -26,15 +25,12 @@ const MainUI = ({ user , logout}) => {
 
 	return (
 		<>
-			<h1>ESSENTIALISM</h1>
 
 			{hideLinks ? (
 				<>
-				<div className='main-ui'>
 						<Link to='/' onClick={handleLogout}>Log Out</Link>
 						<Link to='/login'>Log In</Link>
-					<Register />
-				</div>
+						<Link to='/register'>Sign Up</Link>
 					<h4 onClick={handleClick}>Back</h4>
 					</>
 			) : (

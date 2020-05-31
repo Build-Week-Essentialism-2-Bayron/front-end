@@ -1,11 +1,23 @@
-import { USER_REGISTER_SUCCESS, USER_LOGIN_SUCCESS, USER_FAILURE, USER_LOGOUT } from '../actions/auth'
+import {
+	USER_REGISTER_START,
+	USER_REGISTER_SUCCESS,
+	USER_LOGIN_START,
+	USER_LOGIN_SUCCESS,
+	USER_FAILURE,
+	USER_LOGOUT,
+} from '../actions/auth'
+
+import { FETCH_VALUES_START, FETCH_VALUES_SUCCESS, FETCH_FAILURE } from '../actions/values'
 
 export const initialState = {
 	isLoading: false,
 
 	isLoggedIn: false,
 
-	user: {},
+	user: {
+		id: null,
+		username: '',
+	},
 
 	message: '',
 
@@ -16,6 +28,12 @@ export const initialState = {
 
 export const rootReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case USER_REGISTER_START:
+			return {
+				...state,
+				isLoading: true,
+			}
+
 		case USER_REGISTER_SUCCESS:
 			return {
 				...state,
@@ -23,7 +41,15 @@ export const rootReducer = (state = initialState, action) => {
 				isLoading: false,
 				user: {
 					id: action.payload.id,
+					username: action.payload.username,
+					token: action.payload.token,
 				},
+			}
+
+		case USER_LOGIN_START:
+			return {
+				...state,
+				isLoading: true,
 			}
 
 		case USER_LOGIN_SUCCESS:
@@ -42,7 +68,27 @@ export const rootReducer = (state = initialState, action) => {
 			}
 
 		case USER_LOGOUT:
-			return initialState
+			return (state = initialState)
+
+		case FETCH_VALUES_START:
+			return {
+				...state,
+				isLoading: true,
+			}
+
+		case FETCH_VALUES_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				values: action.payload,
+			}
+
+		case FETCH_FAILURE:
+			return {
+				...state,
+				isLoading: false,
+				message: 'ERROR: Data not returned from API',
+			}
 
 		default:
 			return state

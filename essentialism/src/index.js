@@ -20,7 +20,6 @@ const actionsLogger = ({ getState }) => next => action => {
 }
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, actionsLogger)))
-console.log('Store inside index.js: ', store)
 
 ReactDOM.render(
 	<Provider store={store}>

@@ -32,9 +32,14 @@ const Register = ({ userRegister }) => {
 		history.replace(`/login`)
 	}
 
+	const handleClick = e => {
+		e.preventDefault()
+		history.goBack()
+	}
+
 	return (
 		<div className='auth-form-wrapper'>
-			<form onSubmit={handleSubmit} className='auth-form'>
+			<form onSubmit={e => handleSubmit(e)} className='auth-form'>
 				{/* Create semantic labels and field names for the values needed to register a new newUser */}
 
 				<label htmlFor='username'>
@@ -46,8 +51,12 @@ const Register = ({ userRegister }) => {
 					Enter Password:
 					<input name='password' type='password' placeholder='password' onChange={handleChange} />
 				</label>
-
-				<button className='auth-button'>Sign Up</button>
+				<button type='submit' className='auth-button'>
+					Register
+				</button>
+				<button type='button' className='auth-button' onClick={e => handleClick(e)}>
+					Cancel
+				</button>
 			</form>
 		</div>
 	)
