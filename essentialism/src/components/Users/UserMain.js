@@ -1,60 +1,42 @@
 import React from 'react'
-// import Spinner from '../Utility/Spinner'
+import { Link, useHistory } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { logout } from '../../redux/actions/auth'
+import { deleteUser } from '../../redux/actions/user'
+// import ValuesList from '../../components/Values/ValuesList'
 
-import { Link } from 'react-router-dom'
+const UserMain = ({ logout, deleteUser }) => {
+	let history = useHistory()
 
-const UserMain = () => {
-	// const handleSave = e => {
-	//   const ID = localStorage.getItem("userID");
-	//   const id = e.target.value;
-	//   console.log(
-	//     "This is the value of the target of the event object in SeekerMain.js",
-	//     e.target.value
-	//   );
-	//   const findJob = jobs.filter(job => job.id === id);
-	//   setSavedJob(findJob);
-	//   addSavedJob(ID, savedJob);
-	// };
-
-	// const handleDelete = e => {
-	//   e.preventDefault();
-	//   const id = e.target.value;
-	//   const ID = localStorage.getItem("userID");
-	//   const findJob = jobs.filter(job => job.id === id);
-	//   const jobId = findJob.id;
-	//   console.log(
-	//     "This is the value of id in SeekerMain.js handleSave function: ",
-	//     jobId
-	//   );
-	//   deleteJob(ID, jobId);
-	// };
-
-	const handleClick = () => {
-		const ID = localStorage.getItem('userID')
+	const handleClick = e => {
+		e.preventDefault()
+		let token = localStorage.getItem('token')
+		let ID = localStorage.getItem('userId')
+		console.log('userI var in handleClick: ', ID)
+		deleteUser(ID, token)
+		history.replace('/')
 	}
 
 	return (
-		<div className='main-ui-container'>
+		<div className='user-profile-container'>
 			<nav>
-				<h3>Essentialism</h3>
-				<div className='main-ui-nav'>
-					<Link to='/user-profile' onClick={handleClick}>
-						Profile
-					</Link>
-					<Link to='/seeker-matches' onClick={handleClick}>
-						Matches
+				<div className='user-links'>
+					<Link to='/values'>Add A Project</Link>
+					<button type='button' className='auth-button' onClick={e => handleClick(e)}>
+						Delete Profile
+					</button>
+					<Link to='/' onClick={logout}>
+						Log Out
 					</Link>
 				</div>
 			</nav>
-			{/* {!isLoading ? ( */}
-			<div className='main-ui'>
-				<h1>Find Jobs</h1>
-				<div className='jobs' />
+
+			<div className='user-profile'>
+				<h5>Your Profile</h5>
+				{/* <ValuesList /> */}
 			</div>
-			{/* ) : ( */}
-			{/* <Spinner /> */}
 		</div>
 	)
 }
 
-export default UserMain
+export default connect(null, { logout, deleteUser })(UserMain)

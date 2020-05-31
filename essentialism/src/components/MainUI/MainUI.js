@@ -1,35 +1,47 @@
 import React, { useState } from 'react'
-import Register from '../UserAuth/Register'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { logout } from '../../redux/actions/auth'
+import Spinner from '../Spinner'
 
-const MainUI = () => {
-	let state = false
-
-	const [ hideLinks, setHideLinks ] = useState(state)
+const MainUI = ({ isLoading, logout }) => {
+	const [ hideLinks, setHideLinks ] = useState(false)
 
 	const handleClick = () => {
-		state = !state
-		setHideLinks(state)
+		setHideLinks(!hideLinks)
 	}
 
-	return (
-		<div className='landing-page'>
-			<h1>ESSENTIALISM</h1>
+	const handleLogout = () => {
+		logout()
+		setHideLinks(!hideLinks)
+	}
 
+	return !isLoading ? (
+		<div className='main-ui'>
 			{hideLinks ? (
-				<>
-				<div className='main-ui'>
-						<Link to='/mainUI'>Profile</Link>
-						<Link to='/'>Log Out</Link>
-					<Register />
+				<div className='main-links'>
+					<Link to='/login' onClick={handleLogout}>
+						Log Out
+					</Link>
+					<Link to='/login'>Log In</Link>
+					<Link to='/register'>Sign Up</Link>
+					<Link to='/' onClick={handleClick}>
+						Back
+					</Link>
 				</div>
-					<h4 onClick={handleClick}>Back</h4>
-					</>
 			) : (
 				<h4 onClick={handleClick}>Click Here to Start</h4>
 			)}
 		</div>
+	) : (
+		<Spinner />
 	)
 }
 
-export default MainUI
+const mapStateToProps = state => {
+	return {
+		isLoggedIn: state.isLoggedIn,
+	}
+}
+
+export default connect(mapStateToProps, { logout })(MainUI)
