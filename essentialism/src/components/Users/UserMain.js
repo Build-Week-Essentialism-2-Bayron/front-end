@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../../redux/actions/auth'
 import { deleteUser } from '../../redux/actions/user'
-import ValuesList from '../../components/Values/ValuesList'
+// import ValuesList from '../../components/Values/ValuesList'
 
 const UserMain = ({ logout, deleteUser }) => {
 	let history = useHistory()
@@ -33,7 +33,7 @@ const UserMain = ({ logout, deleteUser }) => {
 
 			<div className='user-profile'>
 				<h5>Your Profile</h5>
-				<ValuesList />
+				{/* <ValuesList /> */}
 			</div>
 		</div>
 	)
