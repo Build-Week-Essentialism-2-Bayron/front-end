@@ -3,20 +3,22 @@ import { connect } from 'react-redux'
 import { fetchValues } from '../../redux/actions/values'
 
 const ValuesList = ({ values, fetchValues }) => {
-	const [ list, setList ] = useState([])
+	const [ list, setList ] = useState({})
 
+	const flattenList = Object.keys(list)
+	console.log(flattenList)
 	useEffect(
 		() => {
 			fetchValues()
 			console.log(values)
 			setList(values)
 		},
-		[ values ],
+		[ values, fetchValues ],
 	)
 
 	return (
 		<div className='values-list'>
-			{list.map(value => {
+			{flattenList.map(value => {
 				return <h5>{value}</h5>
 			})}
 		</div>

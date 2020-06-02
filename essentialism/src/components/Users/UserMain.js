@@ -3,17 +3,15 @@ import { Link, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../../redux/actions/auth'
 import { deleteUser } from '../../redux/actions/user'
-// import ValuesList from '../../components/Values/ValuesList'
+import ValuesList from '../../components/Values/ValuesList'
 
 const UserMain = ({ logout, deleteUser }) => {
 	let history = useHistory()
 
 	const handleClick = e => {
 		e.preventDefault()
-		let token = localStorage.getItem('token')
-		let ID = localStorage.getItem('userId')
-		console.log('userI var in handleClick: ', ID)
-		deleteUser(ID, token)
+		localStorage.clear()
+		deleteUser()
 		history.replace('/')
 	}
 
@@ -21,11 +19,13 @@ const UserMain = ({ logout, deleteUser }) => {
 		<div className='user-profile-container'>
 			<nav>
 				<div className='user-links'>
-					<Link to='/values'>Add A Project</Link>
-					<button type='button' className='auth-button' onClick={e => handleClick(e)}>
+					<Link to='/values' className='nav-item'>
+						Add A Project
+					</Link>
+					<Link to='/' className='nav-item' onClick={e => handleClick(e)}>
 						Delete Profile
-					</button>
-					<Link to='/' onClick={logout}>
+					</Link>
+					<Link to='/' className='nav-item' onClick={logout}>
 						Log Out
 					</Link>
 				</div>
@@ -33,7 +33,7 @@ const UserMain = ({ logout, deleteUser }) => {
 
 			<div className='user-profile'>
 				<h5>Your Profile</h5>
-				{/* <ValuesList /> */}
+				<ValuesList />
 			</div>
 		</div>
 	)

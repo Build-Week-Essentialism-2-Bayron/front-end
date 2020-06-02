@@ -1,5 +1,7 @@
 import { axiosWithAuth } from '../../components/utils/axiosWithAuth'
 
+// import axios from 'axios'
+
 // action types for manipulating values list
 
 export const FETCH_VALUES_START = 'FETCH_VALUES_START'
