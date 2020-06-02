@@ -29,9 +29,16 @@ html .App h1,
 body .App h1,
 #root .App h1 {
   font-size: 58pt;
+  background-color: rgba(0, 0, 0, 0.139);
   font-weight: 100;
-  width: 60rem;
+  width: 80rem;
   margin-bottom: 2rem;
+}
+html .App .values-list,
+body .App .values-list,
+#root .App .values-list {
+  border: 2px solid red;
+  display: flex;
 }
 html .App .main-ui-wrapper,
 body .App .main-ui-wrapper,
@@ -227,7 +234,7 @@ body .App .main-ui-wrapper .auth-form-wrapper .auth-form .auth-button,
   margin-bottom: 1rem;
   padding: 0.5rem;
   width: 13rem;
-  font-size: 18pt;
+  font-size: 15pt;
 }
 html .App .main-ui-wrapper .auth-form-wrapper .auth-form #cancel button,
 html .App .main-ui-wrapper .auth-form-wrapper .auth-form #cancel a,
