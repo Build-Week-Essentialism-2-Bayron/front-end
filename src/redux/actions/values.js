@@ -19,11 +19,15 @@ export const fetchValues = () => dispatch => {
 	axiosWithAuth()
 		.get(`${BASE_URL}/values`)
 		.then(res => {
-			console.log(res)
 			dispatch({
 				type: FETCH_VALUES_SUCCESS,
 				payload: res.data,
 			})
 		})
-		.catch(err => console.log('Error: ', err))
+		.catch(err => {
+			dispatch({
+				type: FETCH_FAILURE,
+				payload: err,
+			})
+		})
 }

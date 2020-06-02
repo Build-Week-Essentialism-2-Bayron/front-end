@@ -6,7 +6,8 @@ export const axiosWithAuth = () => {
 	console.log('Bearer token inside axiosWithAuth: ', token)
 	return axios.create({
 		headers: {
-			Authorization: token,
+			'Content-type': 'Application/json',
+			Authorization: `Bearer ${token}`,
 		},
 	})
 }
