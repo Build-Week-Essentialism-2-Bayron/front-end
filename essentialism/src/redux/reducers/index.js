@@ -9,7 +9,7 @@ import {
 
 import { FETCH_VALUES_START, FETCH_VALUES_SUCCESS, FETCH_FAILURE } from '../actions/values'
 
-import { DELETE_USER_START, DELETE_USER_SUCCESS } from '../actions/user'
+import { DELETE_USER_START, DELETE_USER_SUCCESS, DELETE_ERROR } from '../actions/user'
 
 export const initialState = {
 	isLoading: false,
@@ -98,8 +98,18 @@ export const rootReducer = (state = initialState, action) => {
 				isLoading: true,
 				message: 'WARNING deleting user',
 			}
+
 		case DELETE_USER_SUCCESS:
-			return initialState
+			return {
+				initialState,
+			}
+
+		case DELETE_ERROR:
+			return {
+				...state,
+				isLoading: false,
+				message: action.payload,
+			}
 
 		default:
 			return state

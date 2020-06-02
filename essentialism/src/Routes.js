@@ -23,10 +23,6 @@ const Routes = ({ isLoggedIn }) => {
 				<h1>ESSENTIALISM</h1>
 
 				<Switch>
-					<ProtectedRoute exact path='/user' component={UserMain} />
-
-					<ProtectedRoute exact path='/values' component={ValuesList} />
-
 					<Route exact path='/'>
 						<MainUI />
 					</Route>
@@ -38,6 +34,10 @@ const Routes = ({ isLoggedIn }) => {
 					<Route exact path='/register'>
 						<Register />
 					</Route>
+
+					<ProtectedRoute exact path='/values' component={ValuesList} />
+
+					<ProtectedRoute exact path='/user' component={UserMain} />
 
 					<Route component={NoMatch} />
 				</Switch>

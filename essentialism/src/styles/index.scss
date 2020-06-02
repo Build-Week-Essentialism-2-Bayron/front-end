@@ -21,13 +21,36 @@ body,
         justify-content: center;
         background-color: rgb(227, 227, 227);
         text-align: center;
-
         padding: 0.2rem 0;
 
+        a {
+            color: #000;
+            background-color: rgb(227, 227, 227);
+            transition: background-color 500ms ease-in-out;
+            transition: border 300ms ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 15rem;
+            height: 40%;
+            text-decoration: none;
+            font-size: 16pt;
+            margin: 0 0.5rem;
+            border-radius: 0;
+            border: none;
+        }
+
+        a:hover {
+            background-color: #fff;
+            color: #7d5a5a;
+            border: 6px solid #000;
+            border-radius: 5px;
+        }
         h1 {
             font-size: 58pt;
+            background-color: rgba(0, 0, 0, 0.139);
             font-weight: 100;
-            width: 60rem;
+            width: 80rem;
             margin: {
                 bottom: 2rem;
             }
@@ -35,6 +58,7 @@ body,
 
         .values-list {
             border: 2px solid red;
+            display: flex;
         }
 
         .main-ui-wrapper {
@@ -114,30 +138,6 @@ body,
                     border-radius: 0;
                 }
 
-                a {
-                    color: #000;
-                    background-color: rgb(227, 227, 227);
-                    transition: background-color 500ms ease-in-out;
-                    transition: border 300ms ease-in-out;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 15rem;
-                    height: 40%;
-                    text-decoration: none;
-                    font-size: 16pt;
-                    margin: 0 0.5rem;
-                    border-radius: 0;
-                    border: none;
-                }
-
-                a:hover {
-                    background-color: #fff;
-                    color: #7d5a5a;
-                    border: 6px solid #000;
-                    border-radius: 5px;
-                }
-
                 .spinner-center {
                     // height: 100%;
                     // width: 100%;
@@ -161,6 +161,58 @@ body,
 
                     a:hover {
                         background-color: initial;
+                    }
+                }
+            }
+            .user-profile-container {
+                box-shadow: black 2px 2px 6px;
+                width: 73vw;
+                // TODO:   MAKE HEIGHT AUTO
+                height: 42vh;
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: inherit;
+
+                .user-links {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: flex-start;
+                    align-items: center;
+                    width: 90%;
+                    height: 6rem;
+                    padding: 0 3rem 1rem;
+                    margin: {
+                        bottom: 6rem;
+                    }
+                    background-color: #7d5a5a;
+                    opacity: 0.9;
+                    box-shadow: black 2px 2px 6px;
+                    box-sizing: content-box;
+                    border-radius: 0;
+
+                    a {
+                        color: #000;
+                        background-color: rgb(227, 227, 227);
+                        transition: background-color 500ms ease-in-out;
+                        transition: border 300ms ease-in-out;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 15rem;
+                        height: 40%;
+                        text-decoration: none;
+                        font-size: 16pt;
+                        margin: 0 0.5rem;
+                        border-radius: 0;
+                        border: none;
+                    }
+
+                    a:hover {
+                        background-color: #fff;
+                        color: #7d5a5a;
+                        border: 6px solid #000;
+                        border-radius: 5px;
                     }
                 }
             }
@@ -218,7 +270,7 @@ body,
                         }
                         padding: 0.5rem;
                         width: 13rem;
-                        font-size: 18pt;
+                        font-size: 15pt;
                     }
 
                     #cancel {
